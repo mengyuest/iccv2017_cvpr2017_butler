@@ -12,9 +12,12 @@ def download(todoitem):
 	paper_path = todoitem[2]
 	dtype = todoitem[3]
 	if dtype == "paper":
-		os.system("mwget -d \""+paper_dir+"\" -n 16 -t 90 http://openaccess.thecvf.com/content_cvpr_2017/papers/"+paper_path)
+		os.system("mwget -d \""+paper_dir+"\" -n " + str(connect_num.value) + \
+			" -t 90 http://openaccess.thecvf.com/content_cvpr_2017/papers/"+paper_path)
 	if dtype == "appendix":
-		os.system("mwget -d \""+paper_dir+"\" -n 16 -t 90 http://openaccess.thecvf.com/content_cvpr_2017/supplemental/"+paper_path)
+		os.system("mwget -d \""+paper_dir+"\" -n " + str(connect_num.value) + \
+			" -t 90 http://openaccess.thecvf.com/content_cvpr_2017/supplemental/"+paper_path)
+
 	shutil.move(paper_dir+paper_path, session_dir+paper_path)
 
 	file_size.value = file_size.value+os.path.getsize(session_dir+paper_path)
@@ -26,10 +29,12 @@ def download(todoitem):
 
 
 if __name__ == "__main__":
-	process_num = 20
 
 	dt_start = datetime.now()
 	server = Manager()
+	process_num = 50
+	connect_num = server.Value('i', 4)
+
 	file_size = server.Value('d', 0)
 
 	file_sum = server.Value('i', 0)
@@ -111,6 +116,7 @@ if __name__ == "__main__":
 					
 					if(sec_row[1][3]!="None"):
 						appendix_path = sec_row[1][3].split("/")[2]
+						matched_count = matched_count+1
 					else:
 						appendix_path = "None"
 					isPaperFound = False
