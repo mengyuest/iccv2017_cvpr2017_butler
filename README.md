@@ -1,4 +1,4 @@
-# cvpr2017_butler
+# iccv2017_cvpr2017_butler
 A super-fast lightweight gadget to **download**, **organize** [cvpr2017](http://cvpr2017.thecvf.com/) papers and [iccv2017](http://iccv2017.thecvf.com) papers from [CVF website](http://openaccess.thecvf.com/menu.py), also do listing and statistics
 
 ## Features
